@@ -383,14 +383,9 @@
             "marked_for_delete": false,
             "mark_for_override": false
           }
-
-        ],
-        "marked_for_delete": false,
-        "overridden": false
+        ]
       },
-      "resource_type": "ChildDomain",
-      "marked_for_delete": false,
-      "mark_for_override": false
+      "resource_type": "ChildDomain"
     }
   ]
 }
