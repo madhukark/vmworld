@@ -19,8 +19,10 @@ data "nsxt_policy_transport_zone" "overlay_tz" {
   display_name = "Overlay-TZ"
 }
 
-data "nsxt_policy_tier0_gateway" "t0_gateway" {
-  display_name = "3Tier-T0"
+resource "nsxt_policy_tier0_gateway" "TF-3Tier-T0" {
+  nsx_id = "TF-3Tier-T0"
+  display_name = "TF-3Tier-T0"
+  ha_mode = "ACTIVE_ACTIVE"
 }
 
 
@@ -32,7 +34,8 @@ resource "nsxt_policy_tier1_gateway" "TF-VMW-T1" {
   default_rule_logging      = "false"
   enable_firewall           = "true"
   force_whitelisting        = "false"
-  tier0_path                = data.nsxt_policy_tier0_gateway.t0_gateway.path
+#  tier0_path                = data.nsxt_policy_tier0_gateway.t0_gateway.path
+  tier0_path                = nsxt_policy_tier0_gateway.TF-3Tier-T0.path
   route_advertisement_types = ["TIER1_NAT", "TIER1_LB_VIP", "TIER1_LB_SNAT", "TIER1_DNS_FORWARDER_IP", "TIER1_CONNECTED", "TIER1_STATIC_ROUTES", "TIER1_IPSEC_LOCAL_ENDPOINT"]
   pool_allocation           = "ROUTING"
 }
@@ -45,7 +48,8 @@ resource "nsxt_policy_tier1_gateway" "TF-Client-T1" {
   default_rule_logging      = "false"
   enable_firewall           = "true"
   force_whitelisting        = "false"
-  tier0_path                = data.nsxt_policy_tier0_gateway.t0_gateway.path
+#  tier0_path                = data.nsxt_policy_tier0_gateway.t0_gateway.path
+  tier0_path                = nsxt_policy_tier0_gateway.TF-3Tier-T0.path
   route_advertisement_types = ["TIER1_LB_VIP", "TIER1_LB_SNAT", "TIER1_DNS_FORWARDER_IP", "TIER1_CONNECTED", "TIER1_STATIC_ROUTES", "TIER1_IPSEC_LOCAL_ENDPOINT"]
   pool_allocation           = "ROUTING"
 }
