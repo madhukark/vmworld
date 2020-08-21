@@ -1,0 +1,51 @@
+# Copyright 2020 VMware, Inc.
+# SPDX-License-Identifier: BSD-2-Clause OR GPL-3.0-only
+---
+- hosts: localhost
+  become: yes
+  vars:
+      nsx_manager: '10.114.200.41'
+      nsx_username: 'admin'
+      nsx_password: 'myPassword1!myPassword1!'
+      validate_certs: 'false'
+  tasks:
+    - name: Tier1 ANS-VMW-T1
+      nsxt_policy_tier1:
+        hostname: "{{ nsx_manager }}"
+        username: "{{ nsx_username }}"
+        password: "{{ nsx_password }}"
+        validate_certs: "{{ validate_certs }}"
+        state: "{{ state }}"
+        display_name: "ANS-VMW-T1"
+        failover_mode: "NON_PREEMPTIVE"
+        disable_firewall: "false"
+        force_whitelisting: "true"
+        tier0_display_name: "ANS-3Tier-T0"
+        route_advertisement_types:
+          - "TIER1_NAT"
+          - "TIER1_LB_VIP"
+          - "TIER1_LB_SNAT"
+          - "TIER1_DNS_FORWARDER_IP"
+          - "TIER1_CONNECTED"
+          - "TIER1_STATIC_ROUTES"
+          - "TIER1_IPSEC_LOCAL_ENDPOINT"
+
+    - name: Tier1 ANS-Client-T1
+      nsxt_policy_tier1:
+        hostname: "{{ nsx_manager }}"
+        username: "{{ nsx_username }}"
+        password: "{{ nsx_password }}"
+        validate_certs: "{{ validate_certs }}"
+        state: "{{ state }}"
+        display_name: "ANS-Client-T1"
+        failover_mode: "NON_PREEMPTIVE"
+        disable_firewall: "false"
+        force_whitelisting: "true"
+        tier0_display_name: "ANS-3Tier-T0"
+        route_advertisement_types:
+          - "TIER1_LB_VIP"
+          - "TIER1_LB_SNAT"
+          - "TIER1_DNS_FORWARDER_IP"
+          - "TIER1_CONNECTED"
+          - "TIER1_STATIC_ROUTES"
+          - "TIER1_IPSEC_LOCAL_ENDPOINT"

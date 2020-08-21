@@ -1,0 +1,8 @@
+# Copyright 2020 VMware, Inc.
+# SPDX-License-Identifier: BSD-2-Clause OR GPL-3.0-only
+---
+- import_playbook: 3-tier-app-Security-Policies.yml state='absent'
+- import_playbook: 3-tier-app-Groups.yml state='absent'
+- import_playbook: 3-tier-app-Segments.yml state='absent'
+- import_playbook: 3-tier-app-T1-Gateways.yml state='absent'
+- import_playbook: 3-tier-app-T0-Gateways.yml state='absent'

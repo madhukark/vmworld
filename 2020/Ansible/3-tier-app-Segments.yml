@@ -1,0 +1,66 @@
+# Copyright 2020 VMware, Inc.
+# SPDX-License-Identifier: BSD-2-Clause OR GPL-3.0-only
+---
+- hosts: localhost
+  become: yes
+  vars:
+      nsx_manager: '10.114.200.41'
+      nsx_username: 'admin'
+      nsx_password: 'myPassword1!myPassword1!'
+      validate_certs: 'false'
+  tasks:
+    - name: Segment ANS-Web
+      nsxt_policy_segment:
+        hostname: "{{ nsx_manager }}"
+        username: "{{ nsx_username }}"
+        password: "{{ nsx_password }}"
+        validate_certs: "{{ validate_certs }}"
+        state: "{{ state }}"
+        display_name: "ANS-Web"
+        transport_zone_display_name: "Overlay-TZ"
+        advanced_config:
+          connectivity: "ON"
+        subnets:
+          - gateway_address: "192.40.10.1/24"
+
+    - name: Segment ANS-App
+      nsxt_policy_segment:
+        hostname: "{{ nsx_manager }}"
+        username: "{{ nsx_username }}"
+        password: "{{ nsx_password }}"
+        validate_certs: "{{ validate_certs }}"
+        state: "{{ state }}"
+        display_name: "ANS-App"
+        transport_zone_display_name: "Overlay-TZ"
+        advanced_config:
+          connectivity: "ON"
+        subnets:
+          - gateway_address: "192.40.20.1/24"
+
+    - name: Segment ANS-Db
+      nsxt_policy_segment:
+        hostname: "{{ nsx_manager }}"
+        username: "{{ nsx_username }}"
+        password: "{{ nsx_password }}"
+        validate_certs: "{{ validate_certs }}"
+        state: "{{ state }}"
+        display_name: "ANS-Db"
+        transport_zone_display_name: "Overlay-TZ"
+        advanced_config:
+          connectivity: "ON"
+        subnets:
+          - gateway_address: "192.40.30.1/24"
+
+    - name: Segment ANS-Client
+      nsxt_policy_segment:
+        hostname: "{{ nsx_manager }}"
+        username: "{{ nsx_username }}"
+        password: "{{ nsx_password }}"
+        validate_certs: "{{ validate_certs }}"
+        state: "{{ state }}"
+        display_name: "ANS-Client"
+        transport_zone_display_name: "Overlay-TZ"
+        advanced_config:
+          connectivity: "ON"
+        subnets:
+          - gateway_address: "192.40.50.1/24"
