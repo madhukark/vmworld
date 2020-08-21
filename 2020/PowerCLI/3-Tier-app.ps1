@@ -142,6 +142,7 @@ if ($args[0] -eq "delete") {
     $groups = Get-NsxtPolicyService -Name "com.vmware.nsx_policy.infra.domains.groups"
     $segments = Get-NsxtPolicyService -Name "com.vmware.nsx_policy.infra.segments"
     $t1s = Get-NsxtPolicyService -Name "com.vmware.nsx_policy.infra.tier1s"
+    $t0LocaleServices = Get-NsxtPolicyService -Name "com.vmware.nsx_policy.infra.tier_0s.locale_services"
     $t0s = Get-NsxtPolicyService -Name "com.vmware.nsx_policy.infra.tier0s"
 
     $PCLIPolicies = @("PCLI-Allow-SQL", "PCLI-Allow-HTTP", "PCLI-Ops")
@@ -176,7 +177,9 @@ if ($args[0] -eq "delete") {
 
     foreach ($item in $PCLIT0s) {
         $t0 = ($t0s.list().results | where {$_.display_name -eq $item})
-        $t0s.delete($t1.id)
+        $t0ls = ($t0LocaleServices.list($t0.id).results | where {$_.display_name -eq 'default'})
+        $t0LocaleServices.delete($t0.id, $t0ls.id)
+        $t0s.delete($t0.id)
         Write-Host "Deleted Tier0 Gateway $item ..."
     }
 

@@ -22,7 +22,7 @@ data "nsxt_policy_transport_zone" "overlay_tz" {
 resource "nsxt_policy_tier0_gateway" "TF-3Tier-T0" {
   nsx_id       = "TF-3Tier-T0"
   display_name = "TF-3Tier-T0"
-  ha_mode      = "ACTIVE_ACTIVE"
+ ha_mode      = "ACTIVE_ACTIVE"
 }
 
 
@@ -59,7 +59,7 @@ resource "nsxt_policy_segment" "TF-Web" {
   transport_zone_path = data.nsxt_policy_transport_zone.overlay_tz.path
 
   subnet {
-    cidr = "192.168.10.1/24"
+    cidr = "192.30.10.1/24"
   }
 
   advanced_config {
@@ -74,7 +74,7 @@ resource "nsxt_policy_segment" "TF-App" {
   transport_zone_path = data.nsxt_policy_transport_zone.overlay_tz.path
 
   subnet {
-    cidr = "192.168.20.1/24"
+    cidr = "192.30.20.1/24"
   }
 
   advanced_config {
@@ -89,7 +89,7 @@ resource "nsxt_policy_segment" "TF-Db" {
   transport_zone_path = data.nsxt_policy_transport_zone.overlay_tz.path
 
   subnet {
-    cidr = "192.168.30.1/24"
+    cidr = "192.30.30.1/24"
   }
 
   advanced_config {
@@ -104,7 +104,7 @@ resource "nsxt_policy_segment" "TF-Client" {
   transport_zone_path = data.nsxt_policy_transport_zone.overlay_tz.path
 
   subnet {
-    cidr = "192.168.50.1/24"
+    cidr = "192.30.50.1/24"
   }
 
   advanced_config {
