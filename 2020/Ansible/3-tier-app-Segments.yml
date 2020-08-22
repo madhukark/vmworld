@@ -9,47 +9,20 @@
       nsx_password: 'myPassword1!myPassword1!'
       validate_certs: 'false'
   tasks:
-    - name: Segment ANS-Web
+    - name: Segment ANS-3Tier
       nsxt_policy_segment:
         hostname: "{{ nsx_manager }}"
         username: "{{ nsx_username }}"
         password: "{{ nsx_password }}"
         validate_certs: "{{ validate_certs }}"
         state: "{{ state }}"
-        display_name: "ANS-Web"
+        display_name: "ANS-3Tier"
         transport_zone_display_name: "Overlay-TZ"
+        tier1_id: "ANS-VMW-T1"
         advanced_config:
           connectivity: "ON"
         subnets:
           - gateway_address: "192.40.10.1/24"
-
-    - name: Segment ANS-App
-      nsxt_policy_segment:
-        hostname: "{{ nsx_manager }}"
-        username: "{{ nsx_username }}"
-        password: "{{ nsx_password }}"
-        validate_certs: "{{ validate_certs }}"
-        state: "{{ state }}"
-        display_name: "ANS-App"
-        transport_zone_display_name: "Overlay-TZ"
-        advanced_config:
-          connectivity: "ON"
-        subnets:
-          - gateway_address: "192.40.20.1/24"
-
-    - name: Segment ANS-Db
-      nsxt_policy_segment:
-        hostname: "{{ nsx_manager }}"
-        username: "{{ nsx_username }}"
-        password: "{{ nsx_password }}"
-        validate_certs: "{{ validate_certs }}"
-        state: "{{ state }}"
-        display_name: "ANS-Db"
-        transport_zone_display_name: "Overlay-TZ"
-        advanced_config:
-          connectivity: "ON"
-        subnets:
-          - gateway_address: "192.40.30.1/24"
 
     - name: Segment ANS-Client
       nsxt_policy_segment:
@@ -60,6 +33,7 @@
         state: "{{ state }}"
         display_name: "ANS-Client"
         transport_zone_display_name: "Overlay-TZ"
+        tier1_id: "ANS-Client-T1"
         advanced_config:
           connectivity: "ON"
         subnets:

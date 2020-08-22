@@ -190,10 +190,7 @@ if ($args[0] -eq "delete") {
     createT1 "PCLI-VMW-T1" "PCLI-3Tier-T0" "Edge-Cluster-01"
     createT1 "PCLI-Client-T1" "PCLI-3Tier-T0" "Edge-Cluster-01"
 
-    createSegment "PCLI-Web" "PCLI-VMW-T1" "192.20.10.1/24" "Overlay-TZ"
-    createSegment "PCLI-App" "PCLI-VMW-T1" "192.20.20.1/24" "Overlay-TZ"
-    createSegment "PCLI-Db" "PCLI-VMW-T1" "192.20.30.1/24" "Overlay-TZ"
-    createSegment "PCLI-Client" "PCLI-Client-T1" "192.20.50.1/24" "Overlay-TZ"
+    createSegment "PCLI-3Tier" "PCLI-VMW-T1" "192.20.10.1/24" "Overlay-TZ"
 
     createGroup "PCLI-all-vms" "VirtualMachine" "Tag" "EQUALS" "nsx"
     createGroup "PCLI-web-vms" "VirtualMachine" "Tag" "EQUALS" "web"

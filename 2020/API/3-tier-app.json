@@ -110,8 +110,8 @@
         "admin_state": "UP",
         "replication_mode": "MTEP",
         "resource_type": "Segment",
-        "id": "Web",
-        "display_name": "Web",
+        "id": "3Tier",
+        "display_name": "3Tier",
         "marked_for_delete": false
       },
       "resource_type": "ChildSegment",
@@ -123,33 +123,8 @@
         "type": "ROUTED",
         "subnets": [
           {
-            "gateway_address": "192.168.2.1/24",
-            "network": "192.168.2.0/24"
-          }
-        ],
-        "connectivity_path": "/infra/tier-1s/VMW-T1",
-        "transport_zone_path": "/infra/sites/default/enforcement-points/default/transport-zones/d7f8d7d9-c7d4-497d-b482-980be8bd0d76",
-        "advanced_config": {
-          "connectivity": "ON"
-        },
-        "admin_state": "UP",
-        "replication_mode": "MTEP",
-        "resource_type": "Segment",
-        "id": "App",
-        "display_name": "App",
-        "marked_for_delete": false
-      },
-      "resource_type": "ChildSegment",
-      "marked_for_delete": false,
-      "mark_for_override": false
-    },
-    {
-      "Segment": {
-        "type": "ROUTED",
-        "subnets": [
-          {
-            "gateway_address": "192.168.3.1/24",
-            "network": "192.168.3.0/24"
+            "gateway_address": "192.168.5.1/24",
+            "network": "192.168.5.0/24"
           }
         ],
         "connectivity_path": "/infra/tier-1s/Client-T1",

@@ -52,44 +52,14 @@ resource "nsxt_policy_tier1_gateway" "TF-Client-T1" {
   pool_allocation           = "ROUTING"
 }
 
-resource "nsxt_policy_segment" "TF-Web" {
-  nsx_id              = "TF-Web"
-  display_name        = "TF-Web"
+resource "nsxt_policy_segment" "TF-3Tier" {
+  nsx_id              = "TF-3Tier"
+  display_name        = "TF-3Tier"
   connectivity_path   = nsxt_policy_tier1_gateway.TF-VMW-T1.path
   transport_zone_path = data.nsxt_policy_transport_zone.overlay_tz.path
 
   subnet {
     cidr = "192.30.10.1/24"
-  }
-
-  advanced_config {
-    connectivity = "ON"
-  }
-}
-
-resource "nsxt_policy_segment" "TF-App" {
-  nsx_id              = "TF-App"
-  display_name        = "TF-App"
-  connectivity_path   = nsxt_policy_tier1_gateway.TF-VMW-T1.path
-  transport_zone_path = data.nsxt_policy_transport_zone.overlay_tz.path
-
-  subnet {
-    cidr = "192.30.20.1/24"
-  }
-
-  advanced_config {
-    connectivity = "ON"
-  }
-}
-
-resource "nsxt_policy_segment" "TF-Db" {
-  nsx_id              = "TF-Db"
-  display_name        = "TF-Db"
-  connectivity_path   = nsxt_policy_tier1_gateway.TF-VMW-T1.path
-  transport_zone_path = data.nsxt_policy_transport_zone.overlay_tz.path
-
-  subnet {
-    cidr = "192.30.30.1/24"
   }
 
   advanced_config {
