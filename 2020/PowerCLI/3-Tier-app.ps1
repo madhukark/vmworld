@@ -1,9 +1,10 @@
-Set-PowerCLIConfiguration -Scope User -ParticipateInCEIP $true -Confirm:$false
+Set-PowerCLIConfiguration -Scope User -ParticipateInCEIP $true -Confirm:$false | Out-Null
 
 $NSX_IP = "10.114.200.41"
 $NSX_User = "admin"
 $NSX_Password = "myPassword1!myPassword1!"
 
+Write-Host "Connecting to NSX Manager ..."
 Connect-NsxtServer -Server $NSX_IP -User $NSX_User -Password $NSX_Password
 
 function createT0($T0GatewayName, $EdgeClusterName) {
@@ -81,7 +82,7 @@ function createGroup($GroupName, $MemberType, $Key, $Operator, $Value) {
     $expressionSpec.value = $value
     $groupSpec.expression.Add($expressionSpec) | Out-Null
     $groups.patch('default', $GroupName, $groupSpec)
-    Write-Host "Created group $GroupName ..."
+    Write-Host "Created Group $GroupName ..."
 }
 
 function createDFWSecurityPolicy($PolicyName, $Category, $RuleName, $SourceGroups, $DestinationGroups, $ServiceList, $Action) {
@@ -147,7 +148,7 @@ if ($args[0] -eq "delete") {
 
     $PCLIPolicies = @("PCLI-Allow-SQL", "PCLI-Allow-HTTP", "PCLI-Ops")
     $PCLIGroups = @("PCLI-all-vms", "PCLI-web-vms", "PCLI-app-vms", "PCLI-db-vms")
-    $PCLISegments = @("PCLI-Web", "PCLI-App", "PCLI-Db", "PCLI-Client")
+    $PCLISegments = @("PCLI-3Tier", "PCLI-Client")
     $PCLIT1s = @("PCLI-VMW-T1", "PCLI-Client-T1")
     $PCLIT0s = @("PCLI-3Tier-T0")
 
@@ -191,6 +192,7 @@ if ($args[0] -eq "delete") {
     createT1 "PCLI-Client-T1" "PCLI-3Tier-T0" "Edge-Cluster-01"
 
     createSegment "PCLI-3Tier" "PCLI-VMW-T1" "192.20.10.1/24" "Overlay-TZ"
+    createSegment "PCLI-Client" "PCLI-Client-T1" "192.20.50.1/24" "Overlay-TZ"
 
     createGroup "PCLI-all-vms" "VirtualMachine" "Tag" "EQUALS" "nsx"
     createGroup "PCLI-web-vms" "VirtualMachine" "Tag" "EQUALS" "web"
