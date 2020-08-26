@@ -41,3 +41,6 @@ Change the given Transport Zone `Overlay-TZ` to the one from your setup
 
 ### Create
 ![](media/vmworld-ans-create.gif)
+
+### Delete
+![](media/vmworld-ans-delete.gif)
