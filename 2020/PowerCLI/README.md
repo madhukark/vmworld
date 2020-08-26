@@ -43,3 +43,9 @@ Use the appropriate Edge Cluster and Transport Zone from your setup
 
 
 ## Sample Run
+
+### Create
+![](media/vmworld-pcli-create.gif)
+
+### Delete
+![](media/vmworld-pcli-delete.gif)
