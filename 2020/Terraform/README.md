@@ -42,3 +42,8 @@ Change the Edge Cluster (line 15) and Transport Zone (line 19) to the ones from 
 
 ## Sample Run
 
+### Create
+![](media/vmworld-tf-create.gif)
+
+### Delete
+![](media/vmworld-tf-delete.gif)
