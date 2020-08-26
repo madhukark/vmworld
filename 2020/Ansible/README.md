@@ -38,3 +38,6 @@ The playbook `3-tier-app-Segments.yml` contains a reference to the precreated Tr
 Change the given Transport Zone `Overlay-TZ` to the one from your setup
 
 ## Sample Run:
+
+### Create
+![](media/vmworld-ans-create.gif)
