@@ -54,5 +54,4 @@ The `marked_for_delete: false` has to be changed to `marked_for_delete: true` an
 The IDs in line `34`, `106`, `131` have to reflect the IDs in your environment. This has to be done for both **Creation** and **Deletion**.
 
 
-## Sample Run:
 
